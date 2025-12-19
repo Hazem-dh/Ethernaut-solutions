@@ -1,14 +1,60 @@
-# Compiler files
-cache/
+# ----------------------------
+# Foundry build / compiler outputs
+# ----------------------------
 out/
+cache/
+artifacts/
+lib/
 
-# Ignores development broadcast logs
+# ----------------------------
+# Broadcast / deployment logs
+# ----------------------------
 broadcast
 /broadcast/*/31337/
 /broadcast/**/dry-run/
+*.json # optional: ignore generated broadcast metadata
 
-# Docs
+# ----------------------------
+# IDE / editor files
+# ----------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ----------------------------
+# Node / package manager (if any)
+# ----------------------------
+node_modules/
+package-lock.json
+yarn.lock
+
+# ----------------------------
+# Docs / miscellaneous
+# ----------------------------
 docs/
 
-# Dotenv file
+# ----------------------------
+# Environment / secrets
+# ----------------------------
 .env
+*.env
+.env.local
+
+# ----------------------------
+# Test coverage reports
+# ----------------------------
+coverage/
+coverage.json
+solcover/
+
+# ----------------------------
+# Misc OS files
+# ----------------------------
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Optional local Forge / Foundry settings
+# ----------------------------
+foundry.toml.local
