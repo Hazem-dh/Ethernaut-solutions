@@ -23,7 +23,7 @@ snapshot :; forge snapshot
 format :; forge fmt
 
 solve:
-	forge script script/$(SCRIPT) \
+	forge script script/$(SCRIPT).s.sol \
 		--rpc-url $$RPC_URL \
 		--broadcast \
-		--private-key $$PRIVATE_KEY
+		--private-key $$PRIVATE_KEY -vvvv
