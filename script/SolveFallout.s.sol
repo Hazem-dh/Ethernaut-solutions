@@ -5,8 +5,8 @@ import {Script} from "forge-std/Script.sol";
 import {Fallout} from "../src/Fallout.sol";
 
 contract SolveFallout is Script {
-
     Fallout public falloutContract;
+
     function setUp() public {}
 
     function run() public {
