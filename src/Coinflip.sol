@@ -31,7 +31,6 @@ contract CoinFlip {
     }
 }
 
-
 contract CoinFlipSolver {
     uint256 public consecutiveWins;
     uint256 lastHash;
