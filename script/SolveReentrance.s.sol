@@ -5,7 +5,6 @@ import {Script} from "forge-std/Script.sol";
 import {Reentrance, ReentranceAttack} from "../src/Reentrance.sol";
 
 contract SolveReentrance is Script {
-
     Reentrance public reentrance;
     ReentranceAttack public reentranceAttack;
 

