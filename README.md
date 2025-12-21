@@ -1,66 +1,65 @@
-## Foundry
+# Ethernaut Solutions
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This repository contains solutions to the [Ethernaut](https://ethernaut.openzeppelin.com/) challenges, implemented using [Foundry](https://book.getfoundry.sh/), a blazing fast, portable and modular toolkit for Ethereum application development.
 
-Foundry consists of:
+## Overview
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+Ethernaut is a Web3/Solidity based wargame inspired by [OverTheWire](https://overthewire.org/) wargames, played in the Ethereum Virtual Machine. Each level is a smart contract that needs to be "hacked" to pass the challenge.
 
-## Documentation
+This repository provides Foundry-based solutions for various Ethernaut levels, including both the vulnerable challenge contracts and the exploit scripts to solve them.
 
-https://book.getfoundry.sh/
+## Prerequisites
 
-## Usage
+- [Foundry](https://book.getfoundry.sh/getting-started/installation) - Install Foundry on your system
+- A Sepolia testnet account with some ETH for testing (optional, for on-chain verification)
 
-### Build
+## Installation
 
-```shell
-$ forge build
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Hazem-dh/Ethernaut-solutions.git
+cd Ethernaut-solutions
 ```
 
-### Test
+2. Install dependencies:
 
-```shell
-$ forge test
+```bash
+forge install
 ```
 
-### Format
+3. Set up environment variables:
 
-```shell
-$ forge fmt
+```bash
+cp .env.example .env
 ```
 
-### Gas Snapshots
+Edit `.env` with your private key, RPC URL, and the contract addresses for the challenges (available on the Ethernaut website).
 
-```shell
-$ forge snapshot
+## Solving Challenges
+
+To solve the Ethernaut challenges on-chain:
+
+1. Ensure your `.env` file is set up with:
+
+   - `PRIVATE_KEY`: Your Sepolia testnet private key
+   - `RPC_URL`: Sepolia RPC URL (e.g., from Infura or Alchemy)
+   - Challenge contract addresses (e.g., `FALLBACK_ADDRESS`, `COINFLIP_ADDRESS`, etc.) - get these from the Ethernaut level instances
+
+2. Run a specific challenge solution:
+
+```bash
+make solve SCRIPT=SolveFallback
 ```
 
-### Anvil
+Replace `SolveFallback` with the appropriate script name for the challenge you want to solve
 
-```shell
-$ anvil
-```
+The script will deploy the exploit contract (if needed) and execute the solution on the Sepolia testnet.
 
-### Deploy
+## License
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Cast
+## Disclaimer
 
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+These solutions are for educational purposes only. Ethernaut challenges are designed to teach about smart contract security vulnerabilities. Never deploy vulnerable contracts on mainnet or with real funds.
