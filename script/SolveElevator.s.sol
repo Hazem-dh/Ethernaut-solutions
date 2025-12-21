@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import {Script} from "forge-std/Script.sol";
 import {GoToTop} from "../src/Elevator.sol";
 
-contract SolveFallback is Script {
+contract SolveElevator is Script {
     GoToTop public go;
 
     function setUp() public {}
