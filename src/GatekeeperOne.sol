@@ -26,4 +26,3 @@ contract GatekeeperOne {
         return true;
     }
 }
-
