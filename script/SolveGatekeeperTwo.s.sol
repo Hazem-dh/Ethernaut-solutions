@@ -29,4 +29,3 @@ contract SolveGatekeeperTwo is Script {
         vm.stopBroadcast();
     }
 }
-
