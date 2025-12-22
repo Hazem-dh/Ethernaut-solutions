@@ -12,9 +12,9 @@ contract SolveCoinFlip is Script {
 
     function run() public {
         vm.startBroadcast();
-        // Deploy the CoinFlipSolver contract
+        //Deploy the CoinFlipSolver contract
         //CoinFlipSolver coinFlip = new CoinFlipSolver(vm.envAddress("COINFLIP_ADDRESS"));
-        // Use the already deployed CoinFlipSolver contract address
+        //Use the already deployed CoinFlipSolver contract address
         CoinFlipSolver coinFlip = CoinFlipSolver(0xa9b538E078A913017a89F28A6BA82b14EFaBbA09);
 
         // Call flip with the correct guess
