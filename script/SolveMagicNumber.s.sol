@@ -13,16 +13,11 @@ contract SolveMagicNumber is Script {
         vm.startBroadcast();
         magicNum = MagicNum(payable(vm.envAddress("MAGICNUMBER_ADDRESS")));
         // we deploy the contract that returns 42 when called
-        bytes
-            memory deploymentBytecode = hex"69602a60005260206000f3600052600a6016f3";
+        bytes memory deploymentBytecode = hex"69602a60005260206000f3600052600a6016f3";
 
         address minimalContractAddress;
         assembly {
-            minimalContractAddress := create(
-                0,
-                add(deploymentBytecode, 0x20),
-                mload(deploymentBytecode)
-            )
+            minimalContractAddress := create(0, add(deploymentBytecode, 0x20), mload(deploymentBytecode))
         }
         magicNum.setSolver(minimalContractAddress);
         vm.stopBroadcast();

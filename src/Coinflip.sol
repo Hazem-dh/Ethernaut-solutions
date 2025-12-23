@@ -13,9 +13,7 @@ contract CoinFlip {
     function flip(bool _guess) public returns (bool) {
         uint256 blockValue = uint256(blockhash(block.number - 1));
 
-        if (lastHash == blockValue) {
-            revert();
-        }
+        if (lastHash == blockValue) revert();
 
         lastHash = blockValue;
         uint256 coinFlip = blockValue / FACTOR;
@@ -44,9 +42,7 @@ contract CoinFlipSolver {
     function flipsolve() public returns (bool) {
         uint256 blockValue = uint256(blockhash(block.number - 1));
 
-        if (lastHash == blockValue) {
-            revert("Block hash is the same as last hash");
-        }
+        if (lastHash == blockValue) revert("Block hash is the same as last hash");
         lastHash = blockValue;
         uint256 coinFlip = blockValue / FACTOR;
         bool side = coinFlip == 1 ? true : false;

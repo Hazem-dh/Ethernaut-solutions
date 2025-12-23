@@ -11,8 +11,6 @@ contract Vault {
     }
 
     function unlock(bytes32 _password) public {
-        if (password == _password) {
-            locked = false;
-        }
+        if (password == _password) locked = false;
     }
 }

