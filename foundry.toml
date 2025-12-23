@@ -10,3 +10,40 @@ remappings = [
 [profile.default.compiler]
 "src/Fallout.sol" = "0.6.12"
 "src/Reentrance.sol" = "0.6.12"
+
+[fmt] # See https://book.getfoundry.sh/reference/config/formatter
+# Line length - Solidity style guide recommends 120
+line_length = 120
+
+# Indentation - 4 spaces is the standard
+tab_width = 4
+
+# Use spaces instead of tabs
+bracket_spacing = false
+
+# Integer types - use explicit sizes (uint256 not uint)
+int_types = "long"
+
+# Multi-line function headers
+multiline_func_header = "attributes_first"
+
+# Quote style - prefer double quotes
+quote_style = "double"
+
+# Number underscore style - thousands separator
+#number_underscore = "thousands"
+
+# Single line blocks for simple statements
+single_line_statement_blocks = "single"
+
+# Override spacing - no space inside brackets
+override_spacing = false
+
+# Wrap comments at line length
+wrap_comments = true
+
+# Ignore certain patterns (add as needed)
+# ignore = ["scripts/**/*.sol"]
+
+# Sort imports
+#sort_imports = true
