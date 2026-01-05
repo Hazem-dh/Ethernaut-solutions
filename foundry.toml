@@ -3,13 +3,12 @@ src = "src"
 out = "out"
 libs = ["lib"]
 remappings = [
-    "openzeppelin-contracts-08/=lib/openzeppelin-contracts/contracts/"
-]
+"openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/"]
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
-[profile.default.compiler]
-"src/Fallout.sol" = "0.6.12"
-"src/Reentrance.sol" = "0.6.12"
+#[profile.default.compiler]
+#"src/Fallout.sol" = "0.6.12"
+#"src/Reentrance.sol" = "0.6.12"
 
 [fmt] # See https://book.getfoundry.sh/reference/config/formatter
 # Line length - Solidity style guide recommends 120
