@@ -29,27 +29,17 @@ contract SolveDex is Script {
             uint256 myToken1Balance = dex.balanceOf(token1, msg.sender);
             uint256 myToken2Balance = dex.balanceOf(token2, msg.sender);
 
-            if (dexToken1Balance == 0 || dexToken2Balance == 0) {
-                break;
-            }
+            if (dexToken1Balance == 0 || dexToken2Balance == 0) break;
 
             // Swap token1 for token2
             if (myToken1Balance > 0) {
                 uint256 swapAmount = myToken1Balance;
                 // Cap the swap amount to not exceed what DEX has
-                uint256 expectedReturn = dex.getSwapPrice(
-                    token1,
-                    token2,
-                    swapAmount
-                );
+                uint256 expectedReturn = dex.getSwapPrice(token1, token2, swapAmount);
                 if (expectedReturn > dexToken2Balance) {
                     // Calculate the exact amount needed to drain token2
-                    swapAmount =
-                        (dexToken2Balance * dexToken1Balance) /
-                        dexToken2Balance;
-                    if (swapAmount > myToken1Balance) {
-                        swapAmount = myToken1Balance;
-                    }
+                    swapAmount = (dexToken2Balance * dexToken1Balance) / dexToken2Balance;
+                    if (swapAmount > myToken1Balance) swapAmount = myToken1Balance;
                 }
                 dex.swap(token1, token2, swapAmount);
             }
@@ -61,27 +51,17 @@ contract SolveDex is Script {
             myToken2Balance = dex.balanceOf(token2, msg.sender);
 
             // Stop if DEX is drained
-            if (dexToken1Balance == 0 || dexToken2Balance == 0) {
-                break;
-            }
+            if (dexToken1Balance == 0 || dexToken2Balance == 0) break;
 
             // Swap token2 for token1
             if (myToken2Balance > 0) {
                 uint256 swapAmount = myToken2Balance;
                 // Cap the swap amount to not exceed what DEX has
-                uint256 expectedReturn = dex.getSwapPrice(
-                    token2,
-                    token1,
-                    swapAmount
-                );
+                uint256 expectedReturn = dex.getSwapPrice(token2, token1, swapAmount);
                 if (expectedReturn > dexToken1Balance) {
                     // Calculate the exact amount needed to drain token1
-                    swapAmount =
-                        (dexToken1Balance * dexToken2Balance) /
-                        dexToken1Balance;
-                    if (swapAmount > myToken2Balance) {
-                        swapAmount = myToken2Balance;
-                    }
+                    swapAmount = (dexToken1Balance * dexToken2Balance) / dexToken1Balance;
+                    if (swapAmount > myToken2Balance) swapAmount = myToken2Balance;
                 }
                 dex.swap(token2, token1, swapAmount);
             }
