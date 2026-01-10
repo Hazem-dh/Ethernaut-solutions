@@ -19,10 +19,7 @@ contract GoodSamaritan {
         try wallet.donate10(msg.sender) {
             return true;
         } catch (bytes memory err) {
-            if (
-                keccak256(abi.encodeWithSignature("NotEnoughBalance()")) ==
-                keccak256(err)
-            ) {
+            if (keccak256(abi.encodeWithSignature("NotEnoughBalance()")) == keccak256(err)) {
                 // send the coins left
                 wallet.transferRemainder(msg.sender);
                 return false;
@@ -71,9 +68,7 @@ contract Wallet {
     error NotEnoughBalance();
 
     modifier onlyOwner() {
-        if (msg.sender != owner) {
-            revert OnlyOwner();
-        }
+        if (msg.sender != owner) revert OnlyOwner();
         _;
     }
 

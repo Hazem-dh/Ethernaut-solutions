@@ -2,13 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
-import {
-    DoubleEntryPoint,
-    CryptoVault,
-    Forta,
-    IDetectionBot,
-    LegacyToken
-} from "../src/DoubleEntryPoint.sol";
+import {DoubleEntryPoint, CryptoVault, Forta, IDetectionBot, LegacyToken} from "../src/DoubleEntryPoint.sol";
 
 // Detection bot that prevents vault from being drained
 contract VaultDetectionBot is IDetectionBot {
@@ -18,10 +12,7 @@ contract VaultDetectionBot is IDetectionBot {
         cryptoVault = _cryptoVault;
     }
 
-    function handleTransaction(
-        address user,
-        bytes calldata msgData
-    ) external override {
+    function handleTransaction(address user, bytes calldata msgData) external override {
         address origSender;
         assembly {
             origSender := calldataload(add(msgData.offset, 68))

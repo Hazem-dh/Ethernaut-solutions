@@ -17,9 +17,7 @@ contract Attacker {
     }
 
     function notify(uint256 amount) external {
-        if (amount == 10) {
-            revert NotEnoughBalance();
-        }
+        if (amount == 10) revert NotEnoughBalance();
     }
 
     function attack() external {
@@ -35,9 +33,7 @@ contract SolveGoodSamaritan is Script {
     function run() public {
         vm.startBroadcast();
 
-        goodSamaritan = GoodSamaritan(
-            payable(vm.envAddress("GOODSAMARITAN_ADDRESS"))
-        );
+        goodSamaritan = GoodSamaritan(payable(vm.envAddress("GOODSAMARITAN_ADDRESS")));
 
         Attacker attacker = new Attacker(address(goodSamaritan));
         attacker.attack();
