@@ -7,7 +7,7 @@ contract AlienCodex is Ownable {
     bool public contact;
     bytes32[] public codex;
 
-    constructor() Ownable(msg.sender) {}
+    constructor() {}
 
     modifier contacted() {
         assert(contact);
