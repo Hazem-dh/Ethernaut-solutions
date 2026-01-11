@@ -10,6 +10,8 @@ remappings = [
 [profile.default.compiler]
 "src/Fallout.sol" = "0.6.12"
 "src/Reentrance.sol" = "0.6.12"
+"src/HigherOrder.sol" = "0.6.12"
+"script/SolveHigherOrder.sol" = "0.6.12"
 
 [fmt] # See https://book.getfoundry.sh/reference/config/formatter
 # Line length - Solidity style guide recommends 120
